@@ -87,3 +87,6 @@ ibex_values <- Ibex.matrix(ibex_example,
 \code{\link[immApex]{propertyEncoder}}, 
 \code{\link[immApex]{geometricEncoder}}
 }
+\author{
+Nick Borcherding, Qile Yang
+}

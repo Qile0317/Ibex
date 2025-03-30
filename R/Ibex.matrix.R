@@ -59,8 +59,9 @@
 #' @importFrom SeuratObject CreateDimReducObject
 #' @importFrom immApex propertyEncoder onehotEncoder geometricEncoder getIR
 #' @importFrom stats complete.cases
-#' 
-#' @seealso 
+#'
+#' @author Nick Borcherding, Qile Yang
+#' @seealso
 #' \code{\link[immApex]{propertyEncoder}}, 
 #' \code{\link[immApex]{geometricEncoder}}
 Ibex.matrix <- function(input.data, 
@@ -76,7 +77,7 @@ Ibex.matrix <- function(input.data,
   # Match arguments for better validation
   chain <- match.arg(chain)
   method <- match.arg(method)
-  
+
   if (method == "encoder") {
     encoder.model <- match.arg(encoder.model)
     encoder.input <- match.arg(encoder.input)
@@ -84,32 +85,27 @@ Ibex.matrix <- function(input.data,
   } else {
     expanded.sequences <- FALSE
   }
-  
-  #Will be used to filter output of getIR()
-  loci <- ifelse(chain == "Heavy", "IGH", c("IGK", "IGL"))
-  
-  # Define loci based on chain selection
+
+  # Define loci based on chain selection and this will be used to filter output of getIR()
   loci <- if (chain == "Heavy") "IGH" else c("IGK", "IGL")
   
   #Getting Sequences
-  BCR <- getIR(input.data, chain, sequence.type = "aa")[[1]]
-  BCR <- BCR[complete.cases(BCR[,2]), ]
+  BCR <- immApex::getIR(input.data, chain, sequence.type = "aa")[[1]]
+  BCR <- BCR[complete.cases(BCR[, 2]), ]
   
   # Determine dictionary for sequence encoding
   if (expanded.sequences) {
-    BCR[,2] <- gsub("-", "_", BCR[,2])
+    BCR[, 2] <- gsub("-", "_", BCR[,2])
     dictionary <- c(amino.acids, "_")
   } else  {
     dictionary <- amino.acids
   }
-  
 
-  
   # Filter by gene locus
   BCR <- BCR[grepl(paste0(loci, collapse = "|"), BCR[, "v"]), ]
   
   # Ensure sequences meet length criteria
-  checkLength(x = BCR[,2], expanded = expanded.sequences)
+  checkLength(x = BCR[, 2], expanded = expanded.sequences)
   length.to.use <- if (expanded.sequences) 90 else 45
   
   if (method == "encoder") {
@@ -133,11 +129,11 @@ Ibex.matrix <- function(input.data,
     reduction <- stats::predict(aa.model, encoded.values, verbose = 0)
   } else if (method == "geometric") {
     if (verbose) print("Performing geometric transformation...")
-    BCR[,2] <- gsub("-", "", BCR[,2])
-    reduction <- suppressMessages(geometricEncoder(BCR[,2], theta = geometric.theta))
+    BCR[, 2] <- gsub("-", "", BCR[, 2])
+    reduction <- suppressMessages(geometricEncoder(BCR[, 2], theta = geometric.theta))
   }
   reduction <- as.data.frame(reduction)
-  barcodes <- BCR[,1]
+  barcodes <- BCR[, 1]
   rownames(reduction) <- barcodes
   colnames(reduction) <- paste0("Ibex_", seq_len(ncol(reduction)))
   return(reduction)
