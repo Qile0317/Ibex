@@ -1,6 +1,9 @@
 CHANGES IN VERSION 0.99.12
 ------------------------
+* Convert `ibex.matrix()` to an S3 generic, and add method for character inputs.
 * Basilisk conversion
+* Added package level documentation. Now `?Ibex` can be run.
+* Added lifecycle dependency
 
 CHANGES IN VERSION 0.99.11
 ------------------------

@@ -13,25 +13,26 @@ biocViews: Software, ImmunoOncology, SingleCell, Classification, Annotation, Seq
 Depends: 
 	R (>= 4.0)
 Imports:
-	basilisk,
-	immApex,
-	methods,
-	Matrix, 
-	reticulate,
-	rlang,
-	SeuratObject,
-	scRepertoire,
-	SingleCellExperiment,
-	stats,
-	SummarizedExperiment,
-	tensorflow,
-	tools
+    basilisk,
+    immApex,
+    methods,
+    Matrix,
+    reticulate,
+    rlang,
+    SeuratObject,
+    scRepertoire,
+    SingleCellExperiment,
+    stats,
+    SummarizedExperiment,
+    tensorflow,
+    tools,
+    lifecycle
 Suggests:
 	BiocStyle, 
 	bluster,
 	dplyr,
 	ggplot2,
-        kableExtra,
+    kableExtra,
 	knitr, 
 	markdown,
 	mumosa,
@@ -39,11 +40,12 @@ Suggests:
 	rmarkdown, 
 	scater,
 	spelling,
-        testthat (>= 3.0.0),
-        utils,
+	testthat (>= 3.0.0),
+	utils,
 	viridis
 SystemRequirements: Python (via basilisk)
 VignetteBuilder: knitr
 Language: en-US
 URL: https://github.com/BorchLab/Ibex/
 BugReports: https://github.com/BorchLab/Ibex/issues
+Roxygen: list(markdown = TRUE)
