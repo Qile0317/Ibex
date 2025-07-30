@@ -54,9 +54,7 @@
 #' @importFrom stats complete.cases
 #' @importFrom tensorflow tf
 #'
-#' @seealso 
-#' [immApex::propertyEncoder()],
-#' [immApex::geometricEncoder()]
+#' @seealso [immApex::propertyEncoder()], [immApex::geometricEncoder()]
 Ibex.matrix <- function(input.data, ...) {
   UseMethod("Ibex.matrix", input.data)
 }
@@ -64,39 +62,35 @@ Ibex.matrix <- function(input.data, ...) {
 #' @export
 Ibex.matrix.character <- function(input.data, ...) {
 
-  infer_CTgene <- function(sequences) {
-    sapply(sequences, function(seq) {
-      # Check if sequence contains underscore (indicating heavy_light chain format)
-      if (grepl("_", seq)) {
-        # Split by underscore to get heavy and light chains
-        chains <- strsplit(seq, "_")[[1]]
-        heavy_chain <- chains[1]
-        light_chain <- if(length(chains) > 1) chains[2] else ""
-        
-        # If None_sequence format, assume it's just a light V gene
-        if (heavy_chain == "None") {
-          # Only light chain present - randomly assign kappa or lambda
-          return(ifelse(runif(1) > 0.5, "IGKV1-X.IGKJ1.IGKC.IGKC", "IGLV1-X.IGLJ1.IGLC1.IGLC1"))
-        } else {
-          # Heavy_Light format - assume heavy V and light V genes
-          light_gene <- ifelse(runif(1) > 0.5, "IGKV1-X.IGKJ1.IGKC.IGKC", "IGLV1-X.IGLJ1.IGLC1.IGLC1")
-          return(paste0("IGHV1-X.IGHD1-1.IGHJ1.IGHM_", light_gene))
-        }
-      } else {
-        # Single sequence - assume it's just a heavy V gene
-        if (seq == "None" || is.na(seq)) {
-          return(NA)
-        } else {
-          return("IGHV1-X.IGHD1-1.IGHJ1.IGHM")
-        }
-      }
-    })
+  infer_ct_gene <- function(seq) {
+
+    aas <- toupper(strsplit(seq, "")[[1]])
+    if (any(!(aas %in% c(amino.acids, "_")))) {
+      stop("a character that isn't an amino acid or underscore isn't allowed")
+    }
+
+    underscore_count <- sum(aas == "_")
+    if (underscore_count > 1) {
+      stop("invalid input, only 1 underscore allowed")
+    }
+
+    if (underscore_count == 0L) {
+      return("NA.VH.NA.NA")
+    }
+
+    left_sequence <- strsplit(seq, "_")[[1]][1]
+    if (identical(left_sequence, "None") || identical(left_sequence, "NA")) {
+      return("NA.NA.NA.NA_NA.VL.NA.NA")
+    }
+
+    "NA.VH.NA.NA_NA.VL.NA.NA"
   }
 
   input.data <- data.frame(
-    barcode = seq_along(input.data),
+    row.names = NULL,
+    barcode = as.character(seq_along(input.data)),
     CTaa = input.data,
-    CTgene = infer_CTgene(input.data)
+    CTgene = sapply(input.data, infer_ct_gene)
   )
 
   Ibex.matrix.default(input.data, ...)
