@@ -11,7 +11,7 @@ test_that("runIbex handles incorrect inputs gracefully", {
   expect_error(runIbex(sc.data = ibex_example, chain = "Heavy", method = "geometric", geometric.theta = "not_numeric"),
                "non-numeric argument to mathematical function")
 })
-    
+
 test_that("runIbex works with Seurat object", {
 
   skip_if_py_not_installed(c("keras", "numpy"))

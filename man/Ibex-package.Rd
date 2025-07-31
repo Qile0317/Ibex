@@ -17,7 +17,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Nick Borcherding \email{ncborch@gmail.com}
+\strong{Maintainer}: Nick Borcherding \email{ncborch@gmail.com} [copyright holder]
+
+Other contributors:
+\itemize{
+  \item Qile Yang \email{qile.yang@berkeley.edu} [contributor]
+}
 
 }
 \keyword{internal}
