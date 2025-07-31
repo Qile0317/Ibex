@@ -1,6 +1,6 @@
 Package: Ibex
 Title: Methods for BCR single-cell embedding 
-Version: 0.99.12
+Version: 0.99.22
 Authors@R: c(
     person(given = "Nick", family = "Borcherding", role = c("aut", "cre"), email = "ncborch@gmail.com"))
 Description: Implementation of the Ibex algorithm for single-cell embedding based on BCR sequences. The package includes a standalone function to encode BCR sequence information by amino acid properties or sequence order using tensorflow-based autoencoder. In addition, the package interacts with SingleCellExperiment or Seurat data objects. 
@@ -13,36 +13,38 @@ biocViews: Software, ImmunoOncology, SingleCell, Classification, Annotation, Seq
 Depends: 
 	R (>= 4.0)
 Imports:
-    basilisk,
-    immApex,
-    methods,
-    Matrix,
-    reticulate,
-    rlang,
-    SeuratObject,
-    scRepertoire,
-    SingleCellExperiment,
-    stats,
-    SummarizedExperiment,
-    tensorflow,
-    tools,
-    lifecycle
+	basilisk,
+	immApex,
+	methods,
+	Matrix, 
+	reticulate (>= 1.43.0),
+	rlang,
+	SeuratObject,
+	scRepertoire,
+	SingleCellExperiment,
+	stats,
+	SummarizedExperiment,
+	tensorflow,
+	tools
 Suggests:
 	BiocStyle, 
 	bluster,
 	dplyr,
 	ggplot2,
-    kableExtra,
+        kableExtra,
 	knitr, 
 	markdown,
 	mumosa,
 	patchwork,
+	Peptides,
 	rmarkdown, 
 	scater,
 	spelling,
 	testthat (>= 3.0.0),
 	utils,
 	viridis
+Remotes:
+    	BorchLab/immApex
 SystemRequirements: Python (via basilisk)
 VignetteBuilder: knitr
 Language: en-US
