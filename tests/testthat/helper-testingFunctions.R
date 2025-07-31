@@ -1,5 +1,5 @@
 getdata <- function(dir, name) {
-	readRDS(paste("testdata/", dir, "/", name, ".rds", sep = "")) # could move testdata 1 dir lvl up nstead
+	readRDS(file.path("testdata", dir, paste0(name, ".rds")))
 }
 
 skip_if_py_not_installed <- function(python_packages) {
