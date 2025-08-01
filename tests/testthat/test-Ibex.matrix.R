@@ -2,7 +2,7 @@
 
 test_that("Ibex.matrix handles incorrect inputs gracefully", {
 
-  Sys.setlocale("LC_CTYPE", "C")
+  Sys.setlocale("LC_CTYPE", "C") # this does mess a bit with the terminal and tick mark
 
   expect_error(
     Ibex.matrix(
@@ -104,9 +104,24 @@ test_that("Ibex.matrix handles different species options", {
 })
 
 test_that("Ibex.matrix.character() works", {
+
   skip_if_py_not_installed(c("keras", "numpy"))
+
   expect_equal(
     Ibex.matrix(ibex_example),
     Ibex.matrix(stats::setNames(ibex_example$CTaa, colnames(ibex_example)))
   )
+
+  heavy_cdr3s <- immApex::generateSequences(min.length = 14, max.length = 16)
+  expect_equal(
+    Ibex.matrix(heavy_cdr3s),
+    Ibex.matrix(paste0(heavy_cdr3s, "_None"))
+  )
+
+  light_cdr3s <- immApex::generateSequences(min.length = 8, max.length = 10)
+  expect_equal(
+    Ibex.matrix(light_cdr3s, chain = "Light"),
+    Ibex.matrix(paste0("None_", light_cdr3s), chain = "Light")
+  )
+
 })

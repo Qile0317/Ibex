@@ -65,7 +65,7 @@ Ibex.matrix.character <- function(input.data, ...) {
 
   infer_ct_gene <- function(seq) {
 
-    aas <- toupper(strsplit(seq, "")[[1]])
+    aas <- toupper(strsplit(gsub("None", "", seq), "")[[1]])
     if (any(!(aas %in% c(amino.acids, "_")))) {
       stop("a character that isn't an amino acid or underscore isn't allowed")
     }
