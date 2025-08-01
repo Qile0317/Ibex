@@ -1,6 +1,7 @@
 # test script for Ibex.matrix.R - testcases are NOT comprehensive!
 
 test_that("Ibex.matrix handles incorrect inputs gracefully", {
+  Sys.setlocale("LC_CTYPE", "C") # this is to make quotations consistent
   expect_error(Ibex.matrix(input.data = ibex_example, chain = "Middle", method = "encoder"),
                "'arg' should be one of \"Heavy\", \"Light\"")
   expect_error(Ibex.matrix(input.data = ibex_example, chain = "Heavy", method = "xyz"),
