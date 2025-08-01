@@ -15,7 +15,8 @@ Ibex.matrix(input.data, ...)
 heavy and/or light chain sequences. If an element has no underscore, it's
 assumed to be heavy chain. If it is two sequences joined by an underscore,
 it is assumed to be the heavy and light chain. To represent pure light
-chains, format elements as None_AMINOACID
+chains, format elements as None_AMINOACID. If the vector is named, the
+names will be treated as barcodes.
 }}
 
 \item{chain}{Character. Specifies which chain to analyze:
@@ -76,5 +77,5 @@ ibex_values <- Ibex.matrix(ibex_example,
 
 }
 \seealso{
-\code{\link[immApex:propertyEncoder]{immApex::propertyEncoder()}}, \code{\link[immApex:geometricEncoder]{immApex::geometricEncoder()}}
+\code{\link[immApex:sequenceEncoder]{immApex::propertyEncoder()}}, \code{\link[immApex:sequenceEncoder]{immApex::geometricEncoder()}}
 }

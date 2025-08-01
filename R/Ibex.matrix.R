@@ -26,7 +26,8 @@
 #'   heavy and/or light chain sequences. If an element has no underscore, it's
 #'   assumed to be heavy chain. If it is two sequences joined by an underscore,
 #'   it is assumed to be the heavy and light chain. To represent pure light
-#'   chains, format elements as None_AMINOACID
+#'   chains, format elements as None_AMINOACID. If the vector is named, the
+#'   names will be treated as barcodes.
 #' @param chain Character. Specifies which chain to analyze:
 #'   - "Heavy" for the heavy chain
 #'   - "Light" for the light chain
@@ -41,7 +42,7 @@
 #' @param encoder.input Character. Specifies the input features for the encoder model. Options include:
 #'   - Amino Acid Properties: "atchleyFactors", "crucianiProperties", "kideraFactors", "MSWHIM","tScales", "zScales"
 #'   - "OHE" for One Hot Encoding 
-#' @param geometric.theta Numeric. Angle (in radians) for the geometric 
+#' @param geometric.theta Numeric. Angle (in radians) for the geometric
 #' transformation. Only used when `method = "geometric"`.
 #' @param species Character. Default is "Human" or "Mouse".
 #' @param verbose Logical. Whether to print progress messages. Default is TRUE.
@@ -88,7 +89,10 @@ Ibex.matrix.character <- function(input.data, ...) {
 
   input.data <- data.frame(
     row.names = NULL,
-    barcode = as.character(seq_along(input.data)),
+    barcode = if (!is.null(names(input.data)))
+      names(input.data)
+    else
+      as.character(seq_along(input.data)),
     CTaa = input.data,
     CTgene = sapply(input.data, infer_ct_gene)
   )

@@ -71,3 +71,11 @@ test_that("Ibex.matrix handles different species options", {
   expect_true(all(grepl("^Ibex_", colnames(result1))))
   expect_true(all(grepl("^Ibex_", colnames(result2))))
 })
+
+test_that("Ibex.matrix.character() works", {
+  skip_if_py_not_installed(c("keras", "numpy"))
+  expect_equal(
+    Ibex.matrix(ibex_example),
+    Ibex.matrix(stats::setNames(ibex_example$CTaa, colnames(ibex_example)))
+  )
+})
