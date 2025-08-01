@@ -3,4 +3,6 @@ RUN apt-get update && apt-get install -y texlive-fonts-extra
 WORKDIR /Ibex
 COPY . .
 RUN Rscript -e "remotes::install_deps(dependencies = TRUE)"
+RUN Rscript -e "install.packages('BiocManager')"
+RUN Rscript -e "BiocManager::install('scRepertoire')"
 RUN Rscript -e "devtools::document(); devtools::test()"
