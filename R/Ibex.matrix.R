@@ -80,8 +80,11 @@ Ibex.matrix.character <- function(input.data, ...) {
     }
 
     left_sequence <- strsplit(seq, "_")[[1]][1]
-    if (identical(left_sequence, "None") || identical(left_sequence, "NA")) {
+    right_sequence <- strsplit(seq, "_")[[1]][2]
+    if (identical(left_sequence, "None")) {
       return("NA.NA.NA.NA_NA.VL.NA.NA")
+    } else if (identical(right_sequence, "None")) {
+      return("NA.VH.NA.NA_NA.NA.NA.NA")
     }
 
     "NA.VH.NA.NA_NA.VL.NA.NA"

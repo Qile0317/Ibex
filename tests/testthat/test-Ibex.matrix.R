@@ -118,6 +118,7 @@ test_that("Ibex.matrix.character() works", {
     Ibex.matrix(paste0(heavy_cdr3s, "_None"))
   )
 
+  # FIXME: Error: `sequences` is empty.
   light_cdr3s <- immApex::generateSequences(min.length = 8, max.length = 10)
   expect_equal(
     Ibex.matrix(light_cdr3s, chain = "Light"),
