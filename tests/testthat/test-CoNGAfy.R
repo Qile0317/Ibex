@@ -24,7 +24,7 @@ test_that("CoNGAfy filters cells correctly", {
 
 test_that("CoNGAfy stops if amino acid sequences are missing", {
 
-  Sys.setlocale("LC_CTYPE", "C")
+  local_reproducible_output(unicode = FALSE)
 
   sc_example <- suppressWarnings(CreateSeuratObject(counts = matrix(rnorm(1000), 
                                                     nrow = 10, 

@@ -2,16 +2,24 @@
 
 test_that("Ibex.matrix handles incorrect inputs gracefully", {
 
-  Sys.setlocale("LC_CTYPE", "C") # this does mess a bit with the terminal and tick mark
+  local_reproducible_output(unicode = FALSE)
 
   expect_error(
     Ibex.matrix(
-      input.data = ibex_example, chain = "Middle", method = "encoder"
+      input.data = ibex_example,
+      chain = "Middle",
+      method = "encoder",
+      verbose = FALSE
     ),
     "'arg' should be one of \"Heavy\", \"Light\""
   )
   expect_error(
-    Ibex.matrix(input.data = ibex_example, chain = "Heavy", method = "xyz"),
+    Ibex.matrix(
+      input.data = ibex_example,
+      chain = "Heavy",
+      method = "xyz",
+      verbose = FALSE
+    ),
     "'arg' should be one of \"encoder\", \"geometric\""
   )
   expect_error(
@@ -19,7 +27,8 @@ test_that("Ibex.matrix handles incorrect inputs gracefully", {
       input.data = ibex_example,
       chain = "Heavy",
       method = "encoder",
-      encoder.model = "ABC"
+      encoder.model = "ABC",
+      verbose = FALSE
     ),
     "'arg' should be one of \"CNN\", \"VAE\", \"CNN.EXP\", \"VAE.EXP\""
   )
@@ -28,7 +37,8 @@ test_that("Ibex.matrix handles incorrect inputs gracefully", {
       input.data = ibex_example,
       chain = "Heavy",
       method = "encoder",
-      encoder.input = "XYZ"
+      encoder.input = "XYZ",
+      verbose = FALSE
     ),
     "arg' should be one of \"atchleyFactors\", \"crucianiProperties\", \"kideraFactors\", \"MSWHIM\", \"tScales\", \"OHE\""
   )
@@ -37,7 +47,8 @@ test_that("Ibex.matrix handles incorrect inputs gracefully", {
       input.data = ibex_example,
       chain = "Heavy",
       method = "geometric",
-      geometric.theta = "not_numeric"
+      geometric.theta = "not_numeric",
+      verbose = FALSE
     ),
     "non-numeric argument to mathematical function"
   )
@@ -114,15 +125,15 @@ test_that("Ibex.matrix.character() works", {
 
   heavy_cdr3s <- immApex::generateSequences(min.length = 14, max.length = 16)
   expect_equal(
-    Ibex.matrix(heavy_cdr3s),
-    Ibex.matrix(paste0(heavy_cdr3s, "_None"))
+    Ibex.matrix(heavy_cdr3s, verbose = FALSE),
+    Ibex.matrix(paste0(heavy_cdr3s, "_None"), verbose = FALSE)
   )
 
   # FIXME: Error: `sequences` is empty.
   light_cdr3s <- immApex::generateSequences(min.length = 8, max.length = 10)
   expect_equal(
-    Ibex.matrix(light_cdr3s, chain = "Light"),
-    Ibex.matrix(paste0("None_", light_cdr3s), chain = "Light")
+    Ibex.matrix(light_cdr3s, chain = "Light", verbose = FALSE),
+    Ibex.matrix(paste0("None_", light_cdr3s), chain = "Light", verbose = FALSE)
   )
 
 })

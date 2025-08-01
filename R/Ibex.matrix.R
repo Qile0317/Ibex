@@ -84,7 +84,7 @@ Ibex.matrix.character <- function(input.data, ...) {
     if (identical(left_sequence, "None")) {
       return("NA.NA.NA.NA_NA.VL.NA.NA")
     } else if (identical(right_sequence, "None")) {
-      return("NA.VH.NA.NA_NA.NA.NA.NA")
+      return("NA.VH.NA.NA")
     }
 
     "NA.VH.NA.NA_NA.VL.NA.NA"
