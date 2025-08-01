@@ -23,12 +23,16 @@ test_that("CoNGAfy filters cells correctly", {
 })
 
 test_that("CoNGAfy stops if amino acid sequences are missing", {
+
+  Sys.setlocale("LC_CTYPE", "C")
+
   sc_example <- suppressWarnings(CreateSeuratObject(counts = matrix(rnorm(1000), 
                                                     nrow = 10, 
                                                     ncol = 100)))
   
   expect_error(CoNGAfy(sc_example, method = "mean"),
                "'CTaa' not found in this Seurat object\n ")
+
 })
 
 test_that("CoNGA.dist selects representative cells correctly", {
