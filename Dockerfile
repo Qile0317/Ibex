@@ -1,5 +1,4 @@
 FROM rocker/verse:4.5.1
-RUN apt-get update && apt-get install -y libgsl27 libgsl-dev
 RUN apt-get update && apt-get install -y texlive-fonts-extra
 WORKDIR /Ibex
 COPY . .
