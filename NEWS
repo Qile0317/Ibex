@@ -4,6 +4,7 @@ CHANGES IN VERSION 0.99.22
 * Fixed failing tests due to locale differences between systems
 * Add Containerization infrastructure with a `Dockerfile` and `devcontainer/devcontainer.json`
 * Suppressed unavoidable tensorflow retracing warning in basilisk python code
+* Ensured no progress bar is displayed during `Ibex.matrix()` if `verbose = FALSE`
 
 CHANGES IN VERSION 0.99.21
 ------------------------

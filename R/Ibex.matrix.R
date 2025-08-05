@@ -190,7 +190,7 @@ Ibex.matrix.default <- function(input.data,
 
         tryCatch({
           model <- keras$models$load_model(mpath)
-          pred  <- model$predict(xmat)
+          pred  <- model$predict(xmat, verbose = if (verbose) "auto" else 0)
           as.array(pred) # This will be the return value
         }, finally = {
           rm(pred)
