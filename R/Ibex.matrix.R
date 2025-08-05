@@ -82,7 +82,7 @@ Ibex.matrix.character <- function(input.data, ...) {
     left_sequence <- strsplit(seq, "_")[[1]][1]
     right_sequence <- strsplit(seq, "_")[[1]][2]
     if (identical(left_sequence, "None")) {
-      return("NA.NA.NA.NA_NA.VL.NA.NA")
+      return("None_NA.VL.NA.NA")
     } else if (identical(right_sequence, "None")) {
       return("NA.VH.NA.NA")
     }
@@ -187,7 +187,7 @@ Ibex.matrix.default <- function(input.data,
         keras <- reticulate::import("keras", delay_load = FALSE)
         model <- NULL
         pred <- NULL
-        
+
         tryCatch({
           model <- keras$models$load_model(mpath)
           pred  <- model$predict(xmat)
