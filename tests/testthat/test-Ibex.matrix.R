@@ -119,17 +119,21 @@ test_that("Ibex.matrix.character() works", {
   skip_if_py_not_installed(c("keras", "numpy"))
 
   expect_equal(
-    Ibex.matrix(ibex_example),
-    Ibex.matrix(stats::setNames(ibex_example$CTaa, colnames(ibex_example)))
+    Ibex.matrix(ibex_example, verbose = FALSE),
+    Ibex.matrix(stats::setNames(ibex_example$CTaa, colnames(ibex_example)), verbose = FALSE)
   )
 
-  heavy_cdr3s <- immApex::generateSequences(min.length = 14, max.length = 16)
+  heavy_cdr3s <- immApex::generateSequences(
+    min.length = 14, max.length = 16, number.of.sequences = 100
+  )
   expect_equal(
     Ibex.matrix(heavy_cdr3s, verbose = FALSE),
     Ibex.matrix(paste0(heavy_cdr3s, "_None"), verbose = FALSE)
   )
 
-  light_cdr3s <- immApex::generateSequences(min.length = 8, max.length = 10)
+  light_cdr3s <- immApex::generateSequences(
+    min.length = 8, max.length = 10, number.of.sequences = 100
+  )
   expect_equal(
     Ibex.matrix(paste0("AAA_", light_cdr3s), chain = "Light", verbose = FALSE),
     Ibex.matrix(paste0("None_", light_cdr3s), chain = "Light", verbose = FALSE)
