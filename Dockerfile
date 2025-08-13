@@ -5,4 +5,5 @@ COPY . .
 RUN Rscript -e "remotes::install_deps(dependencies = TRUE)"
 RUN Rscript -e "install.packages('BiocManager')"
 RUN Rscript -e "BiocManager::install('scRepertoire')"
+RUN Rscript -e "BiocManager::install('basilisk')"
 RUN Rscript -e "devtools::document(); devtools::test()"
