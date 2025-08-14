@@ -123,7 +123,17 @@ Ibex.matrix.character <- function(
     CTgene = sapply(input.data, infer_ct_gene)
   )
 
-  Ibex.matrix.default(input.data, ...)
+  Ibex.matrix.default(
+    input.data,
+    chain = chain, 
+    method = method,
+    encoder.model = encoder.model, 
+    encoder.input = encoder.input,
+    geometric.theta = geometric.theta, 
+    species = species,
+    verbose = verbose,
+    ...
+  )
 }
 
 #' @export
@@ -206,7 +216,7 @@ Ibex.matrix.default <- function(
 
         warnings <- reticulate::import("warnings", delay_load = FALSE)
         warnings$filterwarnings(
-          "ignore", message = ".*tf.function retracing.*"
+          "ignore", message = ".*tf\\.function retracing.*"
         )
 
         keras <- reticulate::import("keras", delay_load = FALSE)
