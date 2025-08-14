@@ -216,8 +216,17 @@ Ibex.matrix.default <- function(
 
         warnings <- reticulate::import("warnings", delay_load = FALSE)
         warnings$filterwarnings(
-          "ignore", message = ".*tf\\.function retracing.*"
+          "ignore", message = ".*Protobuf gencode version.*" # TODO: this is a py dep issue
         )
+
+        logging <- reticulate::import("logging", delay_load = FALSE)
+        IbexInferenceWarnFilter <- reticulate::PyClass(
+          "IbexInferenceWarnFilter", inherit = logging$Filter,
+          list(filter = function(self, record) {
+            grepl(".*tf\\.function retracing.*", record$getMessage())
+          })
+        )
+        tf$get_logger()$addFilter(IbexInferenceWarnFilter())
 
         keras <- reticulate::import("keras", delay_load = FALSE)
         model <- NULL
