@@ -3,11 +3,22 @@ getdata <- function(dir, name) {
 }
 
 skip_if_py_not_installed <- function(python_packages) {
-	for (python_package in python_packages) {
-		if (!reticulate::py_module_available(python_package)) {
-			testthat::skip(paste(
-				"Required Python Module", python_package, "is not available."
-			))
-		}
+
+	missing_packages <- basilisk::basiliskRun(
+		env = IbexEnv,
+		fun = function(packages) {
+			packages[sapply(packages, Negate(reticulate::py_module_available))]
+		},
+		packages = python_packages
+	)
+	
+	if (length(missing_packages) > 0) {
+		testthat::skip(paste(
+			"Required Python Module",
+			if (length(missing_packages) > 1) "s" else "",
+			paste(missing_packages, collapse = ", "),
+			"not available."
+		))
 	}
+
 }

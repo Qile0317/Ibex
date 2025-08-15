@@ -56,6 +56,7 @@ test_that("Ibex.matrix handles incorrect inputs gracefully", {
 })
 
 test_that("Ibex.matrix returns expected output format", {
+
   skip_if_py_not_installed(c("keras", "numpy"))
   result <- Ibex.matrix(input.data = ibex_example, 
                         chain = "Heavy", 
