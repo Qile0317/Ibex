@@ -12,3 +12,6 @@
 ^\.devcontainer
 ^\.trigger_build$
 ^Dockerfile$
+^dev
+^\.BBSoptions$
+^\.vscode
