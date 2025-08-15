@@ -19,13 +19,11 @@ Imports:
 	methods,
 	Matrix, 
 	reticulate (>= 1.43.0),
-	rlang,
 	SeuratObject,
 	scRepertoire,
 	SingleCellExperiment,
 	stats,
 	SummarizedExperiment,
-	tensorflow,
 	tools
 Suggests:
 	BiocStyle, 
@@ -41,6 +39,7 @@ Suggests:
 	rmarkdown, 
 	scater,
 	spelling,
+	tensorflow,
 	testthat (>= 3.0.0),
 	utils,
 	viridis

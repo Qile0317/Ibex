@@ -5,7 +5,4 @@ COPY . .
 RUN apt install -y libgsl-dev
 RUN Rscript -e "install.packages('Seurat')"
 RUN Rscript -e "remotes::install_deps(dependencies = TRUE)"
-RUN Rscript -e "\
-    devtools::test(); \
-    install.packages('keras3'); \
-    basilisk::basiliskRun(env = IbexEnv, fun = function() keras3::install_keras())"
+RUN Rscript -e "devtools::test()"

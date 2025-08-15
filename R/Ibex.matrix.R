@@ -54,7 +54,6 @@
 #' @importFrom SeuratObject CreateDimReducObject
 #' @importFrom immApex propertyEncoder onehotEncoder geometricEncoder getIR
 #' @importFrom stats complete.cases
-#' @importFrom tensorflow tf
 #'
 #' @seealso [immApex::propertyEncoder()], [immApex::geometricEncoder()]
 Ibex.matrix <- function(
@@ -214,28 +213,13 @@ Ibex.matrix.default <- function(
       env = IbexEnv,
       fun = function(mpath, xmat) {
 
-        # warnings <- reticulate::import("warnings")
-        # warnings$filterwarnings(
-        #   "ignore", message = ".*Protobuf gencode version.*" # TODO: this is a py dep issue
-        # )
-
-        # logging <- reticulate::import("logging")
-        # IbexInferenceWarnFilter <- reticulate::PyClass(
-        #   "IbexInferenceWarnFilter", inherit = logging$Filter,
-        #   list(filter = function(self, record) {
-        #     grepl(".*tf\\.function retracing.*", record$getMessage())
-        #   })
-        # )
-        # tf <- reticulate::import("tensorflow")
-        # tf$get_logger()$addFilter(IbexInferenceWarnFilter())
-
         keras <- reticulate::py_suppress_warnings(reticulate::import("keras"))
         model <- NULL
         pred <- NULL
 
         tryCatch({
           model <- keras$models$load_model(mpath)
-          pred  <- model$predict(xmat, verbose = if (verbose) "auto" else 0)
+          pred  <- model$predict(xmat, verbose = if (verbose) "auto" else 0) # FIXME: suppress retracing warning
           as.array(pred) # This will be the return value
         }, finally = {
           rm(pred)
@@ -251,7 +235,7 @@ Ibex.matrix.default <- function(
     
   } else if (method == "geometric") {
     if (verbose) print("Performing geometric transformation...")
-    BCR[,"cdr3_aa"] <- gsub("-", "", BCR[,"cdr3_aa"])
+    BCR[, "cdr3_aa"] <- gsub("-", "", BCR[, "cdr3_aa"])
     reduction <- suppressMessages(geometricEncoder(BCR[,"cdr3_aa"], theta = geometric.theta))[[3]]
   }
   reduction <- as.data.frame(reduction)
