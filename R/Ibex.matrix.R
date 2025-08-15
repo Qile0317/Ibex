@@ -214,21 +214,22 @@ Ibex.matrix.default <- function(
       env = IbexEnv,
       fun = function(mpath, xmat) {
 
-        warnings <- reticulate::import("warnings", delay_load = FALSE)
-        warnings$filterwarnings(
-          "ignore", message = ".*Protobuf gencode version.*" # TODO: this is a py dep issue
-        )
+        # warnings <- reticulate::import("warnings")
+        # warnings$filterwarnings(
+        #   "ignore", message = ".*Protobuf gencode version.*" # TODO: this is a py dep issue
+        # )
 
-        logging <- reticulate::import("logging", delay_load = FALSE)
-        IbexInferenceWarnFilter <- reticulate::PyClass(
-          "IbexInferenceWarnFilter", inherit = logging$Filter,
-          list(filter = function(self, record) {
-            grepl(".*tf\\.function retracing.*", record$getMessage())
-          })
-        )
-        tf$get_logger()$addFilter(IbexInferenceWarnFilter())
+        # logging <- reticulate::import("logging")
+        # IbexInferenceWarnFilter <- reticulate::PyClass(
+        #   "IbexInferenceWarnFilter", inherit = logging$Filter,
+        #   list(filter = function(self, record) {
+        #     grepl(".*tf\\.function retracing.*", record$getMessage())
+        #   })
+        # )
+        # tf <- reticulate::import("tensorflow")
+        # tf$get_logger()$addFilter(IbexInferenceWarnFilter())
 
-        keras <- reticulate::import("keras", delay_load = FALSE)
+        keras <- reticulate::py_suppress_warnings(reticulate::import("keras"))
         model <- NULL
         pred <- NULL
 
