@@ -146,6 +146,8 @@ be extremely helpful.
 
 ### [Pull Requests](https://github.com/BorchLab/Ibex/pulls) are welcome for bug fixes, new features, or enhancements
 
+Note: Managing python and R environments along with numerous system dependencies may be tricky - using the provided `Dockerfile` and `.devcontainer/devcontainer.json` can help in creating an environment that is guaranteed to work with Ibex on your system using [`docker`](https://www.docker.com/).
+
 ## Citation
 
-More information on Ibex is available at our [Biorxiv preprint](https://www.biorxiv.org/content/10.1101/2022.11.09.515787v2).
+More information on Ibex is available at our [BioRxiv preprint](https://www.biorxiv.org/content/10.1101/2022.11.09.515787v2).
