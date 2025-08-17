@@ -13,11 +13,12 @@ skip_if_py_not_installed <- function(python_packages) {
 	)
 	
 	if (length(missing_packages) > 0) {
-		testthat::skip(paste(
+		testthat::skip(paste0(
 			"Required Python Module",
 			if (length(missing_packages) > 1) "s" else "",
-			paste(missing_packages, collapse = ", "),
-			"not available."
+			" `",
+			paste(missing_packages, collapse = "`, `"),
+			"` not available."
 		))
 	}
 
