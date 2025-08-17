@@ -1,4 +1,4 @@
-CHANGES IN VERSION 0.99.22
+DEVELOPMENT VERSION CHANGES
 --------------------------
 * `Ibex.matrix()` is now an S3 method that now also accepts character vectors of AA sequences as input. See the new docs for more information.
 * Fixed failing tests due to locale differences between systems
@@ -9,6 +9,10 @@ CHANGES IN VERSION 0.99.22
 	* adding `configure` and `configure.win` that run `basilisk::configureBasiliskEnv()`
 	* setting the windows32 platform as unsupported in `.BBSoptions`
 	* and adding `StagedInstall: no` to `DESCRIPTION`
+
+CHANGES IN VERSION 0.99.27
+------------------------
+* Remove `.onLoad()` manual basilisk caching config
 
 CHANGES IN VERSION 0.99.21
 ------------------------
