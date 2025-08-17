@@ -1,9 +1,13 @@
- Ibex
+# Ibex
+
 Using BCR sequences for graph embedding
 
+<!-- badges: start -->
+[![Bioc release status](http://www.bioconductor.org/shields/build/release/bioc/Ibex.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/Ibex)
 [![R-CMD-check](https://github.com/BorchLab/Ibex/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/BorchLab/Ibex/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/BorchLab/Ibex/graph/badge.svg)](https://app.codecov.io/gh/BorchLab/Ibex?branch=master)
 [![Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://www.borch.dev/uploads/screpertoire/articles/ibex)
+<!-- badges: end -->
 
 <img align="right" src="https://github.com/BorchLab/Ibex/blob/main/www/ibex_hex.png" width="352" height="352">
 
