@@ -1,6 +1,6 @@
 Package: Ibex
 Title: Methods for BCR single-cell embedding 
-Version: 0.99.22
+Version: 0.99.27.9000
 Authors@R: c(
     person(given = "Nick", family = "Borcherding", role = c("aut", "cre", "cph"), email = "ncborch@gmail.com"),
 	person(given = "Qile", family = "Yang", role = c("ctb"), email = "qile.yang@berkeley.edu"))
@@ -43,9 +43,9 @@ Suggests:
 	testthat (>= 3.0.0),
 	utils,
 	viridis
+SystemRequirements: Python (via basilisk)
 Remotes:
     BorchLab/immApex
-SystemRequirements: Python (via basilisk)
 VignetteBuilder: knitr
 Language: en-US
 URL: https://github.com/BorchLab/Ibex/
