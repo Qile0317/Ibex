@@ -2,9 +2,9 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, dev]
   pull_request:
-    branches: [main, master]
+    branches: [main, master, dev]
 
 name: test-coverage
 
@@ -12,7 +12,7 @@ permissions: read-all
 
 jobs:
   test-coverage:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
@@ -25,11 +25,8 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::covr, any::xml2, rcmdcheck, keras3 
+          extra-packages: any::covr, any::xml2, rcmdcheck
           needs: coverage
-
-      - name: Install Keras Python dependencies
-        run: R -e 'keras3::install_keras()'  # This runs the install_keras function from R
 
       - name: Test coverage
         run: |
