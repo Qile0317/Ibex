@@ -1,8 +1,9 @@
 Package: Ibex
 Title: Methods for BCR single-cell embedding 
-Version: 0.99.27
+Version: 0.99.28
 Authors@R: c(
-    person(given = "Nick", family = "Borcherding", role = c("aut", "cre"), email = "ncborch@gmail.com"))
+    person(given = "Nick", family = "Borcherding", role = c("aut", "cre", "cph"), email = "ncborch@gmail.com"),
+	person(given = "Qile", family = "Yang", role = c("ctb"), email = "qile.yang@berkeley.edu"))
 Description: Implementation of the Ibex algorithm for single-cell embedding based on BCR sequences. The package includes a standalone function to encode BCR sequence information by amino acid properties or sequence order using tensorflow-based autoencoder. In addition, the package interacts with SingleCellExperiment or Seurat data objects. 
 License: MIT + file LICENSE 
 Encoding: UTF-8
@@ -18,13 +19,11 @@ Imports:
 	methods,
 	Matrix, 
 	reticulate (>= 1.43.0),
-	rlang,
 	SeuratObject,
 	scRepertoire,
 	SingleCellExperiment,
 	stats,
 	SummarizedExperiment,
-	tensorflow,
 	tools
 Suggests:
 	BiocStyle, 
