@@ -1,4 +1,4 @@
-DEVELOPMENT VERSION CHANGES
+CHANGES IN VERSION 0.99.28
 --------------------------
 * `Ibex.matrix()` is now an S3 method that now also accepts character vectors of AA sequences as input. See the new docs for more information.
 * Fixed failing tests due to locale differences between systems
