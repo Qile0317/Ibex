@@ -6,15 +6,18 @@
 #' the BLOSUM62 matrix.
 #'
 #' @examples
+#' # Get Data
+#' ibex_example <- get(data("ibex_example"))
+#' 
 #' # Using the encoder method with a variational autoencoder
-#' ibex_values <- Ibex.matrix(ibex_example, 
+#' ibex_values <- Ibex_matrix(ibex_example, 
 #'                            chain = "Heavy",
 #'                            method = "encoder",
 #'                            encoder.model = "VAE",
 #'                            encoder.input = "atchleyFactors")
 #'
 #' # Using the geometric method with a specified angle
-#' ibex_values <- Ibex.matrix(ibex_example, 
+#' ibex_values <- Ibex_matrix(ibex_example, 
 #'                            chain = "Heavy",
 #'                            method = "geometric",
 #'                            geometric.theta = pi)
@@ -51,7 +54,7 @@
 #' @seealso 
 #' [immApex::propertyEncoder()], 
 #' [immApex::geometricEncoder()]
-Ibex.matrix <- function(input.data, 
+Ibex_matrix <- function(input.data, 
                         chain = c("Heavy", "Light"), 
                         method = c("encoder", "geometric"),
                         encoder.model = c("CNN", "VAE", "CNN.EXP", "VAE.EXP"), 
@@ -92,15 +95,15 @@ Ibex.matrix <- function(input.data,
   } else  {
     dictionary <- amino.acids
   }
-  
-  # Filter by gene locus
-  #BCR <- BCR[grepl(paste0(loci, collapse = "|"), BCR[, "v"]), ]
-  
   # Ensure sequences meet length criteria
   checkLength(x = BCR[,"cdr3_aa"], expanded = expanded.sequences)
   length.to.use <- if (expanded.sequences) 90 else 45
   
   if (method == "encoder") {
+    if (!.ibex_ensure_external_dir()) {
+      stop("Basilisk external directory is not writable; cannot run encoder in this session.")
+    }
+    
     if (verbose) print("Encoding Sequences...")
     
     if(encoder.input == "OHE") {
@@ -156,3 +159,5 @@ Ibex.matrix <- function(input.data,
   colnames(reduction) <- paste0("Ibex_", seq_len(ncol(reduction)))
   return(reduction)
 }
+
+
