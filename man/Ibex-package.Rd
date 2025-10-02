@@ -6,23 +6,43 @@
 \alias{Ibex-package}
 \title{Ibex: Methods for BCR single-cell embedding}
 \description{
-Implementation of the Ibex algorithm for single-cell embedding based on BCR sequences. The package includes a standalone function to encode BCR sequence information by amino acid properties or sequence order using tensorflow-based autoencoder. In addition, the package interacts with SingleCellExperiment or Seurat data objects.
+Ibex implements methods for embedding B-cell receptor (BCR) sequences from
+single-cell assays into a continuous latent space. It supports amino-acid
+property–based and sequence-order encodings via a TensorFlow autoencoder,
+and interoperates with common single-cell containers such as
+\pkg{SingleCellExperiment} and \pkg{SeuratObject}.
+}
+\details{
+\strong{Key features}
+\itemize{
+\item Encode BCR sequence information using biochemical properties or raw
+sequence order (TensorFlow autoencoder).
+\item Interoperate with \pkg{SingleCellExperiment} and \pkg{SeuratObject}
+for downstream analysis and visualization.
+\item Utilities for loading pretrained models and managing dependencies in
+an isolated \pkg{basilisk} environment.
+}
+
+\strong{Getting started}
+\preformatted{
+browseVignettes("Ibex")
+}
+
+\strong{Models and caching}
+Pretrained encoders can be retrieved with \code{aa.model.loader()}, which
+validates against internal metadata and caches downloaded artifacts; see the
+function help for cache location and behavior.
+
+\strong{Python/TensorFlow note}
+Ibex uses \pkg{basilisk} to provision an isolated Python environment at
+runtime; no manual setup is usually required.
 }
 \seealso{
-Useful links:
-\itemize{
-  \item \url{https://github.com/BorchLab/Ibex/}
-  \item Report bugs at \url{https://github.com/BorchLab/Ibex/issues}
-}
-
+\url{https://github.com/BorchLab/Ibex} \cr
+\url{https://github.com/BorchLab/Ibex/issues}
 }
 \author{
-\strong{Maintainer}: Nick Borcherding \email{ncborch@gmail.com} [copyright holder]
-
-Other contributors:
-\itemize{
-  \item Qile Yang \email{qile.yang@berkeley.edu} [contributor]
-}
+\strong{Maintainer}: Nick Borcherding \email{ncborch@gmail.com}
 
 }
-\keyword{internal}
+\keyword{package}

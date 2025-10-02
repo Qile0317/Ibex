@@ -1,4 +1,7 @@
 # test script for runIbex.R - testcases are NOT comprehensive!
+library(Ibex)
+ibex_example <- get(data("ibex_example"))
+
 test_that("runIbex handles incorrect inputs gracefully", {
   local_reproducible_output(unicode = FALSE)
 

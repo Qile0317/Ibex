@@ -1,60 +1,23 @@
+CHANGES IN VERSION 0.99.31
+------------------------
+* ibex_ensure_basilisk_external_dir no longer importsFrom basilisk.utils directly
+
+CHANGES IN VERSION 0.99.30
+------------------------
+* Moved data processing script out of vignette to inst/scripts
+* Added ibex_ensure_basilisk_external_dir with basilisk.utils
+
+CHANGES IN VERSION 0.99.29
+------------------------
+* Adding internal .OnLoad() function to handle basilisk lock dir issue
+
 CHANGES IN VERSION 0.99.28
---------------------------
-* `Ibex.matrix()` is now an S3 method that now also accepts character vectors of AA sequences as input. See the new docs for more information.
-* Fixed failing tests due to locale differences between systems
-* Add Containerization infrastructure with a `Dockerfile` and `devcontainer/devcontainer.json`
-* Ensured no progress bar is displayed during `Ibex.matrix()` if `verbose = FALSE`
-* Slim down dependency requirements by removing the R imports `rlang`, `tensorflow`
-* Improve build configuration to match basilisk's convensions by:
-	* adding `configure` and `configure.win` that run `basilisk::configureBasiliskEnv()`
-	* setting the windows32 platform as unsupported in `.BBSoptions`
-	* and adding `StagedInstall: no` to `DESCRIPTION`
-
-CHANGES IN VERSION 0.99.27
 ------------------------
-* Remove `.onLoad()` manual basilisk caching config
-
-CHANGES IN VERSION 0.99.21
-------------------------
-* Delayed Instantiation
-
-CHANGES IN VERSION 0.99.20
-------------------------
-* basilisk call onload
-
-CHANGES IN VERSION 0.99.19
-------------------------
-* removing basilisk sandwich 
-
-CHANGES IN VERSION 0.99.18
-------------------------
-* assigning current environment to basilisk environment
-
-CHANGES IN VERSION 0.99.17
-------------------------
-* basilisk is not intuitive
-
-CHANGES IN VERSION 0.99.16
-------------------------
-* flanking library(ibex) with basilisk creation
-
-CHANGES IN VERSION 0.99.15
-------------------------
-* defining system env for basilisk in vignette
-
-CHANGES IN VERSION 0.99.14
-------------------------
-* Adding proper wrapper to ```ibex.matrix()```
-
-CHANGES IN VERSION 0.99.12
-------------------------
-* Basilisk conversion
-* Added package level documentation. Now `?Ibex` can be run.
-* Added lifecycle dependency
-
-CHANGES IN VERSION 0.99.11
-------------------------
-* Switched keras python check to chunk-specific for vignette  
+* Deprecated `quietBCRgenes()`
+* Converted `Ibex.matrix()` to `Ibex_matrix()`
+* Added Install Instructions for BioCondcutor on README and Vignette
+* Removed references to Keras3 Installation
+* Removed LazyData TRUE statement
 
 CHANGES IN VERSION 0.99.10
 ------------------------
