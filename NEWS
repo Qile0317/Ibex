@@ -2,7 +2,9 @@
 
 - removed rlang from Imports
 - Reformatted `NEWS`
-- Add `.BBSoptions` with `UnsupportedPlatforms: win32` as per `basilisk` documentation
+- As per `basilisk` documentation:
+    - Add `.BBSoptions` with `UnsupportedPlatforms: win32`
+    - Add `configure` and `configure.win` scripts
 - Add Docker infrastructure with `Dockerfile` and `.devcontainer/devcontainer.json`
 - Add `.markdownlint.json` to sourcecode
 
