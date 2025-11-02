@@ -84,6 +84,6 @@ ibex_values <- Ibex_matrix(ibex_example,
 
 }
 \seealso{
-\code{\link[immApex:propertyEncoder]{immApex::propertyEncoder()}},
-\code{\link[immApex:geometricEncoder]{immApex::geometricEncoder()}}
+\code{\link[immApex:sequenceEncoder]{immApex::propertyEncoder()}},
+\code{\link[immApex:sequenceEncoder]{immApex::geometricEncoder()}}
 }
