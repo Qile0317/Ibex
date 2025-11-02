@@ -3,6 +3,7 @@
 - removed rlang from Imports
 - Reformatted NEWS file
 - Add `.BBSoptions` with `UnsupportedPlatforms: win32` as per `basilisk` documentation
+- Add Docker infrastructure with `Dockerfile` and `.devcontainer/devcontainer.json`
 
 # Ibex 1.0.0
 
