@@ -1,12 +1,13 @@
 # Ibex Development Version
 
 - removed rlang from Imports
-- Reformatted `NEWS`
+- Reformatted `NEWS` and `README.md`
 - As per `basilisk` documentation:
     - Add `.BBSoptions` with `UnsupportedPlatforms: win32`
     - Add `configure` and `configure.win` scripts
 - Add Docker infrastructure with `Dockerfile` and `.devcontainer/devcontainer.json`
 - Add `.markdownlint.json` to sourcecode
+- Improved testthat compatibility across platforms
 
 # Ibex 1.0.0
 
