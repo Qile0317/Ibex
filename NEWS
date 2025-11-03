@@ -19,11 +19,11 @@
 
 ## Feature Changes
 
-- Converted Ibex.matrix() to Ibex_matrix()
-- Updated support for SCE format for runIbex()
-- Update CoNGAfy() to function with all versions of Seurat
-- Updated quietBCRgenes() to use VariableFeatures() call for SeuratV5 and backward compatibility.
-- Add getHumanIgPseudoGenes() to return a list of human Immunoglobulin Pseudo genes that are kept by quietBCRgenes()
+- Renamed `Ibex.matrix()` to `Ibex_matrix()`
+- Updated support for SCE format for `runIbex()`
+- Update `CoNGAfy()` to function with all versions of Seurat
+- Updated `quietBCRgenes()` to use `VariableFeatures()` call for SeuratV5 and backward compatibility.
+- Add `getHumanIgPseudoGenes()` to return a list of human Immunoglobulin Pseudo genes that are kept by `quietBCRgenes()`
 
 ## New Models
 
