@@ -1,8 +1,11 @@
 # Ibex - Change Log
 
-## v1.3.1
+## v1.3.2
 
 * Fixed inverted boolean condition check for `.EXP` models in `Ibex_matrix`
+
+## v1.3.1
+
 * Realign versioning again with Bioconductor release
 
 ## v1.1.1
