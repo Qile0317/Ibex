@@ -3,6 +3,9 @@
 ## v1.3.2
 
 * Fixed inverted boolean condition check for `.EXP` models in `Ibex_matrix`
+* `aa.model.loader()` now downloads encoder models to a temporary file and only moves them into the cache after a verified transfer, preventing a failed or partial download from poisoning the cache
+* `aa.model.loader()` retries transient download failures (e.g. Zenodo 504 errors) with back-off before erroring
+* Encoder-based tests now skip rather than error when the model cannot be downloaded from Zenodo
 
 ## v1.3.1
 

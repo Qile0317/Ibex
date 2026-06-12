@@ -131,22 +131,55 @@ aa.model.loader <- function(species,
     dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
   
   local_path <- file.path(cache_dir, file_name)
-  
-  ## 4. Download if we have never seen this model before
+
+  ## 4. Download if we have never seen this model before.
+  ##    Fetch into a temp file and only move it into the cache once the
+  ##    transfer has verifiably succeeded, so a failed or partial download
+  ##    can never poison the cache. Retry a few times to ride out transient
+  ##    host errors (e.g. a Zenodo 504 Gateway Timeout).
   if (!file.exists(local_path)) {
-    message("Downloading model '", file_name, " ...")
+    message("Downloading model '", file_name, "' ...")
     base_url <- "https://zenodo.org/record/14919286/files"
-    status   <- utils::download.file(
-      url      = file.path(base_url, file_name),
-      destfile = local_path,
-      mode     = "wb",
-      quiet    = TRUE
-    )
-    if (status != 0)
-      stop("Download of model '", file_name,
-           "' failed (status ", status, ").")
+    url      <- file.path(base_url, file_name)
+    tmp_path <- tempfile(fileext = ".keras")
+    on.exit(unlink(tmp_path), add = TRUE)
+
+    attempts <- 3L
+    ok <- FALSE
+    for (i in seq_len(attempts)) {
+      status <- tryCatch(
+        utils::download.file(
+          url      = url,
+          destfile = tmp_path,
+          mode     = "wb",
+          quiet    = TRUE
+        ),
+        error = function(e) {
+          message("  attempt ", i, "/", attempts, " failed: ",
+                  conditionMessage(e))
+          1L
+        }
+      )
+      if (identical(as.integer(status), 0L) &&
+          file.exists(tmp_path) && file.size(tmp_path) > 0) {
+        ok <- TRUE
+        break
+      }
+      unlink(tmp_path)
+      if (i < attempts) Sys.sleep(2 * i)  # linear back-off before retry
+    }
+
+    if (!ok)
+      stop("Download of model '", file_name, "' from ", url,
+           " failed after ", attempts, " attempts. The remote host may be ",
+           "temporarily unavailable; please try again later.")
+
+    ## Move the verified file into the cache only now. file.rename can fail
+    ## across filesystems, so fall back to copy.
+    if (!file.rename(tmp_path, local_path))
+      file.copy(tmp_path, local_path, overwrite = TRUE)
   }
-  
+
   ## 5. Done return the path for use in basiliskRun()
   normalizePath(local_path, winslash = "/")
 }

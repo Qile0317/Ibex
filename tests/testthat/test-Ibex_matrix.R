@@ -19,11 +19,13 @@ test_that("Ibex_matrix handles incorrect inputs gracefully", {
 
 test_that("Ibex_matrix returns expected output format", {
   skip_if_py_not_installed(c("keras", "numpy"))
-  result <- Ibex_matrix(input.data = ibex_example, 
-                        chain = "Heavy", 
+  skip_if_model_unavailable(chain = "Heavy", encoder.model = "VAE",
+                            encoder.input = "atchleyFactors")
+  result <- Ibex_matrix(input.data = ibex_example,
+                        chain = "Heavy",
                         method = "encoder",
-                        encoder.model = "VAE", 
-                        encoder.input = "atchleyFactors", 
+                        encoder.model = "VAE",
+                        encoder.input = "atchleyFactors",
                         verbose = FALSE)
   expect_true(is.data.frame(result))
   expect_true(all(grepl("^Ibex_", colnames(result))))
@@ -33,11 +35,13 @@ test_that("Ibex_matrix returns expected output format", {
 
 test_that("Ibex_matrix works with encoder method", {
   skip_if_py_not_installed(c("keras", "numpy"))
-  result <- Ibex_matrix(input.data = ibex_example, 
-                        chain = "Light", 
+  skip_if_model_unavailable(chain = "Light", encoder.model = "CNN",
+                            encoder.input = "OHE")
+  result <- Ibex_matrix(input.data = ibex_example,
+                        chain = "Light",
                         method = "encoder",
-                        encoder.model = "CNN", 
-                        encoder.input = "OHE", 
+                        encoder.model = "CNN",
+                        encoder.input = "OHE",
                         verbose = FALSE)
   expect_true(is.data.frame(result))
   expect_true(all(grepl("^Ibex_", colnames(result))))
@@ -56,7 +60,11 @@ test_that("Ibex_matrix works with geometric method", {
 
 test_that("Ibex_matrix handles different species options", {
   skip_if_py_not_installed(c("keras", "numpy"))
-  result1 <- Ibex_matrix(input.data = ibex_example, 
+  skip_if_model_unavailable(species = "Human", chain = "Heavy",
+                            encoder.model = "VAE", encoder.input = "atchleyFactors")
+  skip_if_model_unavailable(species = "Mouse", chain = "Heavy",
+                            encoder.model = "VAE", encoder.input = "atchleyFactors")
+  result1 <- Ibex_matrix(input.data = ibex_example,
                           chain = "Heavy", 
                           method = "encoder",
                           encoder.model = "VAE", 
@@ -118,6 +126,8 @@ test_that("Ibex_matrix character input works with light chain", {
 
 test_that("Ibex_matrix character input works with encoder method", {
   skip_if_py_not_installed(c("keras", "numpy"))
+  skip_if_model_unavailable(species = "Human", chain = "Heavy",
+                            encoder.model = "VAE", encoder.input = "atchleyFactors")
   sequences <- c("CARDYWGQGTLVTVSS", "CARDSSGYWGQGTLVTVSS")
   result <- Ibex_matrix(input.data = sequences, 
                         chain = "Heavy", 

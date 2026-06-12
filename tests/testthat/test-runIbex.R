@@ -19,6 +19,8 @@ test_that("runIbex handles incorrect inputs gracefully", {
 
 test_that("runIbex works with Seurat object", {
   skip_if_py_not_installed(c("keras", "numpy"))
+  skip_if_model_unavailable(chain = "Heavy", encoder.model = "VAE",
+                            encoder.input = "atchleyFactors")
   suppressWarnings(sc_example <- CreateSeuratObject(counts = matrix(rnorm(1000), nrow = 10, ncol = 100)))
   sc_example[["CTaa"]] <- sample(c("CASSL", "CASST", NA, "NA_IGHV1", "None_IGHV2"), 100, replace = TRUE)
   sc_example[["CTgene"]] <- sample(c("NA_IGHV1.IGD1.IGJ1.IGM", "NA_IGHV1.IGD1.IGJ1.IGM", NA, "NA_IGHV1.IGD1.IGJ1.IGM", "None_IGHV1.IGD1.IGJ1.IGM"), 100, replace = TRUE)
@@ -54,6 +56,8 @@ test_that("runIbex works with geometric method", {
 
 test_that("runIbex filters cells correctly", {
   skip_if_py_not_installed(c("keras", "numpy"))
+  skip_if_model_unavailable(chain = "Heavy", encoder.model = "VAE",
+                            encoder.input = "atchleyFactors")
   sc_example <- suppressWarnings(CreateSeuratObject(counts = matrix(rnorm(1000), nrow = 10, ncol = 100)))
   sc_example[["CTaa"]] <- c(rep("CASSL", 50), rep(NA, 50))
   sc_example[["CTgene"]] <- sample(c("NA_IGHV1.IGD1.IGJ1.IGM", "NA_IGHV1.IGD1.IGJ1.IGM", NA, "NA_IGHV1.IGD1.IGJ1.IGM", "None_IGHV1.IGD1.IGJ1.IGM"), 100, replace = TRUE)
@@ -87,10 +91,12 @@ test_that("runIbex stops if amino acid sequences are missing", {
 
 test_that("runIbex works with different reduction names", {
   skip_if_py_not_installed(c("keras", "numpy"))
+  skip_if_model_unavailable(chain = "Heavy", encoder.model = "VAE",
+                            encoder.input = "atchleyFactors")
   sc_example <- suppressWarnings(SeuratObject::CreateSeuratObject(counts = matrix(rnorm(1000), nrow = 10, ncol = 100)))
   sc_example[["CTaa"]] <- sample(c("CASSL", "CASST", NA, "NA_IGHV1", "None_IGHV2"), 100, replace = TRUE)
   sc_example[["CTgene"]] <- sample(c("NA_IGHV1.IGD1.IGJ1.IGM", "NA_IGHV1.IGD1.IGJ1.IGM", NA, "NA_IGHV1.IGD1.IGJ1.IGM", "None_IGHV1.IGD1.IGJ1.IGM"), 100, replace = TRUE)
-  result1 <- runIbex(sc_example, 
+  result1 <- runIbex(sc_example,
                       chain = "Heavy", 
                       method = "encoder",
                       encoder.model = "VAE", 
